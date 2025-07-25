@@ -24,8 +24,8 @@
         
         if (typeof CPBContentLocker === 'function') {
             window.CPABUILDSETTINGS = window.CPABUILDSETTINGS || {
-                it: 4406378,
-                key: "c1004"
+                it: 4530775,
+                key: "9e72a"
             };
             window.xfContentLocker = new CPBContentLocker();
         }
