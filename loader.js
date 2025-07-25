@@ -1,5 +1,5 @@
 (function() {
-    const ALLOWED_DOMAINS = ["230.lat", "www.230.lat"];
+    const ALLOWED_DOMAINS = ["www.230.lat"];
     if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
     function injectLocker() {
