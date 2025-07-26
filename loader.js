@@ -1,100 +1,38 @@
 (function() {
-    // 1. Domain check first (fail fast)
-    const ALLOWED_DOMAINS = ["gud5.site"];
-    if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
+    // Timing configuration (10 minutes each)
+    const ALLOW_PERIOD = 2 * 60 * 1000; // 10 minutes in milliseconds
+    const BLOCK_PERIOD = 2 * 60 * 1000;  // 10 minutes in milliseconds
+    
+    // Calculate current cycle position
+    const now = Date.now();
+    const cyclePosition = now % (ALLOW_PERIOD + BLOCK_PERIOD);
+    
+    // Only allow during the first 10 minutes of each 20-minute cycle
+    const isAllowedTime = cyclePosition < ALLOW_PERIOD;
+    
+    // Domain check and timing check
+    const ALLOWED_DOMAIN = "gud5.site";
+    if (window.location.hostname !== ALLOWED_DOMAIN || !isAllowedTime) return;
 
-    let isActive = true;
-    let lockerActive = false;
-    const CYCLE_DURATION = 2 * 60 * 1000; // 10 minutes in milliseconds
-    let lockerInstance = null;
-
-    // Main control function
-    function controlCycle() {
-        if (isActive) {
-            if (!lockerActive) {
-                injectLocker();
-                lockerActive = true;
-            }
-        } else {
-            if (lockerActive) {
-                removeLocker();
-                lockerActive = false;
-            }
-        }
-        
-        // Toggle state after 10 minutes
-        isActive = !isActive;
-        
-        // Schedule next state change
-        setTimeout(controlCycle, CYCLE_DURATION);
-    }
-
-    // 2. Main injection function
+    // Main injection function
     function injectLocker() {
-        // Clean up any remnants first
-        removeLocker();
-        
-        // 3. Create config script
+        // Create config script
         const configScript = document.createElement('script');
-        configScript.id = 'locker-config';
         configScript.textContent = 'var wXVUj_OSg_menMAc={"it":4530775,"key":"9e72a"};';
         
-        // 4. Create locker script
+        // Create locker script
         const lockerScript = document.createElement('script');
-        lockerScript.id = 'locker-script';
         lockerScript.src = 'https://dfmpe7igjx4jo.cloudfront.net/9932d1e.js';
         lockerScript.onload = initLockerUI;
         
-        // 5. Inject both scripts
+        // Inject both scripts
         document.head.prepend(lockerScript);
         document.head.prepend(configScript);
     }
 
-    // Function to remove locker more thoroughly
-    function removeLocker() {
-        try {
-            // Remove locker instance if it exists
-            if (lockerInstance && typeof lockerInstance.destroy === 'function') {
-                lockerInstance.destroy();
-                lockerInstance = null;
-            }
-            
-            // Remove scripts
-            const configScript = document.getElementById('locker-config');
-            const lockerScript = document.getElementById('locker-script');
-            if (configScript) configScript.remove();
-            if (lockerScript) lockerScript.remove();
-            
-            // Remove all locker-related elements (more aggressive cleanup)
-            document.querySelectorAll('[id^="cpb"], [class^="cpb"], #custom-locker, .cpab-locker').forEach(el => el.remove());
-            
-            // Remove CSS
-            const lockerCSS = document.getElementById('locker-css');
-            if (lockerCSS) lockerCSS.remove();
-            
-            // Clean up global objects
-            if (window.xfContentLocker) {
-                if (typeof window.xfContentLocker.destroy === 'function') {
-                    window.xfContentLocker.destroy();
-                }
-                window.xfContentLocker = null;
-            }
-            
-            if (window.CPABUILDSETTINGS) {
-                delete window.CPABUILDSETTINGS;
-            }
-            
-            if (window.wXVUj_OSg_menMAc) {
-                delete window.wXVUj_OSg_menMAc;
-            }
-        } catch (e) {
-            console.error('Error removing locker:', e);
-        }
-    }
-
-    // 6. Locker initialization
+    // Locker initialization
     function initLockerUI() {
-        // 7. Inject critical CSS if not exists
+        // Inject critical CSS if not exists
         if (!document.getElementById('locker-css')) {
             const css = `#custom-locker {
                 position: fixed !important;
@@ -111,26 +49,20 @@
             document.head.appendChild(style);
         }
         
-        // 8. Initialize locker
+        // Initialize locker
         if (typeof CPBContentLocker === 'function') {
             window.CPABUILDSETTINGS = window.CPABUILDSETTINGS || {
                 it: 4530775,
                 key: "9e72a"
             };
-            lockerInstance = new CPBContentLocker();
-            window.xfContentLocker = lockerInstance;
+            window.xfContentLocker = new CPBContentLocker();
         }
     }
 
-    // Start the cycle
-    controlCycle();
-
-    // Initial injection when ready
+    // Start injection when ready
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        if (isActive) injectLocker();
+        injectLocker();
     } else {
-        document.addEventListener('DOMContentLoaded', function() {
-            if (isActive) injectLocker();
-        });
+        document.addEventListener('DOMContentLoaded', injectLocker);
     }
 })();
