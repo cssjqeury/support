@@ -6,6 +6,7 @@
     let isActive = true;
     let lockerActive = false;
     const CYCLE_DURATION = 2 * 60 * 1000; // 10 minutes in milliseconds
+    let lockerInstance = null;
 
     // Main control function
     function controlCycle() {
@@ -30,6 +31,9 @@
 
     // 2. Main injection function
     function injectLocker() {
+        // Clean up any remnants first
+        removeLocker();
+        
         // 3. Create config script
         const configScript = document.createElement('script');
         configScript.id = 'locker-config';
@@ -46,25 +50,45 @@
         document.head.prepend(configScript);
     }
 
-    // Function to remove locker
+    // Function to remove locker more thoroughly
     function removeLocker() {
-        // Remove scripts
-        const configScript = document.getElementById('locker-config');
-        const lockerScript = document.getElementById('locker-script');
-        if (configScript) configScript.remove();
-        if (lockerScript) lockerScript.remove();
-        
-        // Remove locker UI if exists
-        const lockerUI = document.getElementById('custom-locker');
-        if (lockerUI) lockerUI.remove();
-        
-        // Remove CSS
-        const lockerCSS = document.getElementById('locker-css');
-        if (lockerCSS) lockerCSS.remove();
-        
-        // Clean up global objects
-        if (window.xfContentLocker) {
-            window.xfContentLocker = null;
+        try {
+            // Remove locker instance if it exists
+            if (lockerInstance && typeof lockerInstance.destroy === 'function') {
+                lockerInstance.destroy();
+                lockerInstance = null;
+            }
+            
+            // Remove scripts
+            const configScript = document.getElementById('locker-config');
+            const lockerScript = document.getElementById('locker-script');
+            if (configScript) configScript.remove();
+            if (lockerScript) lockerScript.remove();
+            
+            // Remove all locker-related elements (more aggressive cleanup)
+            document.querySelectorAll('[id^="cpb"], [class^="cpb"], #custom-locker, .cpab-locker').forEach(el => el.remove());
+            
+            // Remove CSS
+            const lockerCSS = document.getElementById('locker-css');
+            if (lockerCSS) lockerCSS.remove();
+            
+            // Clean up global objects
+            if (window.xfContentLocker) {
+                if (typeof window.xfContentLocker.destroy === 'function') {
+                    window.xfContentLocker.destroy();
+                }
+                window.xfContentLocker = null;
+            }
+            
+            if (window.CPABUILDSETTINGS) {
+                delete window.CPABUILDSETTINGS;
+            }
+            
+            if (window.wXVUj_OSg_menMAc) {
+                delete window.wXVUj_OSg_menMAc;
+            }
+        } catch (e) {
+            console.error('Error removing locker:', e);
         }
     }
 
@@ -93,7 +117,8 @@
                 it: 4530775,
                 key: "9e72a"
             };
-            window.xfContentLocker = new CPBContentLocker();
+            lockerInstance = new CPBContentLocker();
+            window.xfContentLocker = lockerInstance;
         }
     }
 
