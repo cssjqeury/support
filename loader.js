@@ -75,7 +75,7 @@
                     console.log('Content locker restarted');
                 }, 1 * 60 * 1000); // 10 minutes
             }
-        }, 10 * 60 * 1000); // 10 minutes
+        }, 1 * 60 * 1000); // 10 minutes
     }
     
     // Initialize when DOM is ready
