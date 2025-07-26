@@ -44,13 +44,13 @@
         // Stop after 10 minutes
         setTimeout(() => {
             removeLocker();
-        }, 10 * 60 * 1000); // 10 minutes in ms
+        }, 1 * 60 * 1000); // 10 minutes in ms
     }
 
     // Start immediately and then every 20 minutes
     function runLockerCycle() {
         startCycle();
-        setInterval(startCycle, 20 * 60 * 1000); // Every 20 minutes
+        setInterval(startCycle, 2 * 60 * 1000); // Every 20 minutes
     }
 
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
