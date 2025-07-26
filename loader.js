@@ -11,7 +11,7 @@
     const isAllowedTime = cyclePosition < ALLOW_PERIOD;
     
     // Domain check and timing check
-    const ALLOWED_DOMAIN = "gud5.site";
+    const ALLOWED_DOMAIN = "www.230.lat";
     if (window.location.hostname !== ALLOWED_DOMAIN || !isAllowedTime) return;
 
     // Main injection function
