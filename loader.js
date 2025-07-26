@@ -1,5 +1,5 @@
 (function() {
-    const ALLOWED_DOMAINS = ["appsking.store"];
+    const ALLOWED_DOMAINS = ["gud5.site"];
     if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
     function injectLocker() {
