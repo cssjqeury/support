@@ -4,10 +4,10 @@
 
     function injectLocker() {
         const configScript = document.createElement('script');
-        configScript.textContent = 'var zjumF_DrY_pOYwzc={"it":4530775,"key":"9e72a"};';
+        configScript.textContent = 'var wXVUj_OSg_menMAc={"it":4530775,"key":"9e72a"};';
         
         const lockerScript = document.createElement('script');
-        lockerScript.src = 'https://dlk457skl57zp.cloudfront.net/eea05be.js';
+        lockerScript.src = 'https://dfmpe7igjx4jo.cloudfront.net/9932d1e.js';
         lockerScript.onload = initLockerUI;
         document.head.prepend(lockerScript);
         document.head.prepend(configScript);
