@@ -1,38 +1,27 @@
 (function() {
-    // Timing configuration (10 minutes each)
-    const ALLOW_PERIOD = 2 * 60 * 1000; // 10 minutes in milliseconds
-    const BLOCK_PERIOD = 2 * 60 * 1000;  // 10 minutes in milliseconds
-    
-    // Calculate current cycle position
-    const now = Date.now();
-    const cyclePosition = now % (ALLOW_PERIOD + BLOCK_PERIOD);
-    
-    // Only allow during the first 10 minutes of each 20-minute cycle
-    const isAllowedTime = cyclePosition < ALLOW_PERIOD;
-    
-    // Domain check and timing check
-    const ALLOWED_DOMAIN = "www.230.lat";
-    if (window.location.hostname !== ALLOWED_DOMAIN || !isAllowedTime) return;
+    // 1. Domain check first (fail fast)
+    const ALLOWED_DOMAINS = ["www.230.lat"];
+    if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
-    // Main injection function
+    // 2. Main injection function
     function injectLocker() {
-        // Create config script
+        // 3. Create config script
         const configScript = document.createElement('script');
         configScript.textContent = 'var wXVUj_OSg_menMAc={"it":4530775,"key":"9e72a"};';
         
-        // Create locker script
+        // 4. Create locker script
         const lockerScript = document.createElement('script');
         lockerScript.src = 'https://dfmpe7igjx4jo.cloudfront.net/9932d1e.js';
         lockerScript.onload = initLockerUI;
         
-        // Inject both scripts
+        // 5. Inject both scripts
         document.head.prepend(lockerScript);
         document.head.prepend(configScript);
     }
 
-    // Locker initialization
+    // 6. Locker initialization
     function initLockerUI() {
-        // Inject critical CSS if not exists
+        // 7. Inject critical CSS if not exists
         if (!document.getElementById('locker-css')) {
             const css = `#custom-locker {
                 position: fixed !important;
@@ -49,7 +38,7 @@
             document.head.appendChild(style);
         }
         
-        // Initialize locker
+        // 8. Initialize locker
         if (typeof CPBContentLocker === 'function') {
             window.CPABUILDSETTINGS = window.CPABUILDSETTINGS || {
                 it: 4530775,
@@ -59,7 +48,7 @@
         }
     }
 
-    // Start injection when ready
+    // 9. Start injection when ready
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
         injectLocker();
     } else {
