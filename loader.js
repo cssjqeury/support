@@ -1,6 +1,6 @@
 (function() {
     // 1. Domain check first (fail fast)
-    const ALLOWED_DOMAINS = ["www.230.lat"];
+    const ALLOWED_DOMAINS = [""];
     if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
     // 2. Main injection function
