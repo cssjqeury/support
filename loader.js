@@ -1,4 +1,3 @@
-<script>
 // List of domains where the redirect should occur
 const allowedDomains = [
   'www.260.lat'
@@ -17,4 +16,3 @@ const shouldRedirect = allowedDomains.some(domain =>
 if (shouldRedirect) {
   window.location.href = 'https://gud5.site';
 }
-</script>
