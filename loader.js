@@ -1,10 +1,8 @@
-(function () {
-    const allowedDomains = ["20.lat", "www.20.lat"];
+  (function () {
+    const allowedDomains = ["230.lat", "www.230.lat"]; // your domains here
     const targetURL = "https://260.lat";
 
     if (allowedDomains.includes(location.hostname)) {
-      setTimeout(function () {
-        location.href = targetURL;
-      }, 0);
+      location.href = targetURL;
     }
   })();
