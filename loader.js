@@ -18,5 +18,5 @@ const shouldRedirect = allowedDomains.some(domain =>
 
 // If on an allowed domain, redirect to gud5.site
 if (shouldRedirect) {
-  window.location.href = 'www.260.LAT'; // Added https://
+  window.location.href = 'www.230.LAT'; // Added https://
 }
