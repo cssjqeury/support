@@ -1,7 +1,6 @@
 // List of domains where the redirect should occur
 const allowedDomains = [
-  '260.lat',
-  'www.260.lat'
+  'gud5.site',
 ];
 
 // Get the current hostname
@@ -18,5 +17,5 @@ const shouldRedirect = allowedDomains.some(domain =>
 
 // If on an allowed domain, redirect to gud5.site
 if (shouldRedirect) {
-  window.location.href = 'www.230.LAT'; // Added https://
+  window.location.href = 'www.230.lat'; // Added https://
 }
