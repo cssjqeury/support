@@ -1,6 +1,6 @@
 (function () {
-    const allowedDomains = ["260.lat", "www.260.lat"];
-    const targetURL = "https://gud5.site";
+    const allowedDomains = ["230.lat", "www.230.lat"];
+    const targetURL = "www.260.lat";
 
     if (allowedDomains.includes(location.hostname)) {
       setTimeout(function () {
