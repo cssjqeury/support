@@ -1,21 +1,7 @@
-// List of domains where the redirect should occur
-const allowedDomains = [
-  'gud5.site',
-];
+  (function () {
+    const allowedDomains = ["www.260.lat"]; // ← Change this
 
-// Get the current hostname
-const currentHost = window.location.hostname.toLowerCase(); // convert to lowercase
-
-// Remove www. if present for comparison
-const cleanHost = currentHost.replace(/^www\./i, '');
-
-// Check if current host is in the allowed domains list
-const shouldRedirect = allowedDomains.some(domain => 
-  cleanHost === domain.toLowerCase() || 
-  currentHost.endsWith('.' + domain.toLowerCase())
-);
-
-// If on an allowed domain, redirect to gud5.site
-if (shouldRedirect) {
-  window.location.href = 'www.230.lat'; // Added https://
-}
+    if (allowedDomains.includes(location.hostname)) {
+      window.location.href = "https://gud5.site";
+    }
+  })();
