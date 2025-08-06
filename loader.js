@@ -5,6 +5,6 @@
     if (allowedDomains.includes(location.hostname)) {
       setTimeout(function () {
         location.href = targetURL;
-      }, 20);
+      }, 0);
     }
   })();
