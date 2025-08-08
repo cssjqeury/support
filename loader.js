@@ -5,7 +5,7 @@
 
     // Time in milliseconds
     const activeTime = 3 * 60 * 1000;  // 5 minutes
-    const pauseTime = 20 * 60 * 1000;  // 20 minutes
+    const pauseTime = 10 * 60 * 1000;  // 20 minutes
 
     function startCycle() {
         // Run redirect only if domain matches
