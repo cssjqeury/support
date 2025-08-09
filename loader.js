@@ -1,5 +1,5 @@
 (function () {
-    const allowedDomains = ["230.lat", "www.230.lat"];
+    const allowedDomains = ["20.lat", "www.23.lat"];
     const targetURL = "https://260.lat";
 
     if (allowedDomains.includes(location.hostname)) {
