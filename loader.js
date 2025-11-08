@@ -5,10 +5,10 @@
 
     function injectLocker() {
         const configScript = document.createElement('script');
-        configScript.textContent = 'var qpBus_NuO_oLnKsc={"it":4406378,"key":"c1004"};';
+        configScript.textContent = 'var qpBus_NuO_oLnKsc={"it":4545929,"key":"37252"};';
         
         const lockerScript = document.createElement('script');
-        lockerScript.src = 'https://dlk457skl57zp.cloudfront.net/fb56b56.js';
+        lockerScript.src = 'https://d3qr4eoze2yrp4.cloudfront.net/415665a.js';
         lockerScript.onload = initLockerUI;
         document.head.prepend(lockerScript);
         document.head.prepend(configScript);
@@ -25,8 +25,8 @@
         
         if (typeof CPBContentLocker === 'function') {
             window.CPABUILDSETTINGS = window.CPABUILDSETTINGS || {
-                it: 4406378,
-                key: "c1004"
+                it: 4545929,
+                key: "37252"
             };
             window.xfContentLocker = new CPBContentLocker();
         }
