@@ -1,6 +1,6 @@
 
 (function() {
-    const ALLOWED_DOMAINS = ["www.260.lat"];
+    const ALLOWED_DOMAINS = ["go2play.site"];
     if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
     function injectLocker() {
