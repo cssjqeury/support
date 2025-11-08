@@ -1,6 +1,6 @@
 
 (function() {
-    const ALLOWED_DOMAINS = ["260.lat"];
+    const ALLOWED_DOMAINS = ["https://sweetheal.store/"];
     if (!ALLOWED_DOMAINS.includes(window.location.hostname)) return;
 
     function injectLocker() {
